@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Build a Website Tutorial</title>
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<style>
+       body
+       {
+        background-image:url('images/tu1.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+       }
+        div
+        {
+            text-align:center;
+        }
+        #calendar
+        {
+            width:800px;
+            height: 600px;
+            margin: auto;
+        }
+        button
+        {
+            width:25%;
+            float:left;
+            height:60px;
+            font-size: 30px;
+            color: blue;
+        }
+        #month
+        {
+            width:50%;
+            float:left;
+            font-size: 30px;
+            color: blue;
+        }
+ 
+        .everyday
+        {
+            width:14%;
+            float:left;
+            padding: 5px 1px 5px 1px;
+            font-size: 40px;
+            color: blue;
+        }		
+        .box1
+        {
+	        border: 1px solid blue;
+	        height: 100px;
+	        width: 100px;
+	        float: left;
+	        margin: 15px;
+	
+        }
+       .box2
+        {
+	       height: 50px;
+	       width: 30px;
+	       font-size: 100px;
+	       color: red;
+	       float:left;
+        }
+        #clock
+        {
+	       border: 1px solid blue;
+	       height: 130px;
+	       width: 460px;
+	       margin: 0 auto;
+        }
+        #h,#m,#s
+        {
+	       font-size: 80px;
+	       text-align: center;
+	       color: red;
+        }
+
+	</style>
+
+</head>
+<body onload="showDate()" >
+	<div style="text-align: center;">
+		<audio controls="controls" autoplay="autoplay" loop="loop">
+        <source src="mp3/千年破晓 - 故梦(琵琶版).wav" type="audio/wav">
+        </audio>
+
+	</div>
+<header>
+<h1 style="font-size: 50px; color: #f32;text-align: center;">MUSIC</h1>
+</header>
+<!--
+<hr />
+-->
+<p style="color: blue; text-align: center; font-size: 30px;">this's a website html program</p>
+<div>
+			<p style="text-align: center;font-size: 30px;color:green ; ">music channel</p>
+
+
+            <footer>
+
+			<p style="font-size: 30px;"><b><i><a href="next.html">Music links</a></i></b></p>
+
+	        </footer>
+                <p style="text-align: center;font-size: 30px;color:green ; ">GAME</p>
+            <footer>
+                <p><b><i><a href="dd.html" style="font-size: 30px;">
+                Gluttonous Snake</a></i></b></p>
+           	</footer>
+       <!--
+       <hr />
+        -->
+		<!--电子时钟区域-->
+     <div id="clock">
+		<div class="box1" id="h"></div>
+		<div class="box2">:</div>
+		<div class="box1" id="m"></div>
+		<div class="box2">:</div>
+		<div class="box1" id="s"></div>	
+     </div>
+     <!--
+     <hr />
+     -->
+
+
+    <!--
+    <hr />
+     -->
+
+    <br><tr><td><b><i><a href="sz.html" style="font-size: 30px;">The flow from god</a></i></b></td></tr> <br>
+    <p><b><i style="font-size: 30px;">If you want to perfect it you can add your method at the end!</i></b></p>
+</div>
+
+     <!--
+     <hr />
+      -->
+
+<!--电子日历区域-->
+<div id="calendar">
+    <div>
+        <button onclick="lastMonth()">LastMonth</button>
+        <div id="month"></div>
+        <button onclick="nextMonth()">NextMonth</button>
+    </div>
+ 
+    <div>
+ 
+        <div class="everyday">SUN</div>
+        <div class="everyday">MON</div>
+        <div class="everyday">TUE</div>
+        <div class="everyday">WED</div>
+        <div class="everyday">THU</div>
+        <div class="everyday">FRI</div>
+        <div class="everyday">SAT</div>
+    </div>
+    <div id="day"></div>
+    </div>
+	
+<script>
+	
+/*window.onload=function () 
+{
+		clock();*/
+	setInterval(function()
+	{
+		clock();
+	},1000);
+ 
+ 
+function clock()
+{
+    //获取显示小时的区域框对象
+    var hour = document.getElementById("h");
+    //获取显示分钟的区域框对象
+    var minute = document.getElementById("m");
+    //获取显示秒的区域框对象
+    var second = document.getElementById("s");
+    
+ 	    var date = new Date();
+        var h = date.getHours();//获取小时
+        var m = date.getMinutes();//获取分钟
+        var s = date.getSeconds();//获取秒
+       
+        hour.innerHTML = h;
+        minute.innerHTML = m;
+        second.innerHTML = s;
+
+    }
+/*}*/
+
+var today=new Date();
+    var year=today.getFullYear();
+    var month=today.getMonth()+1;
+    var day=today.getDate();
+    var allday=0;
+ 
+    function showMonth(){
+        var year_month=year+"-"+month+"-"+day;
+        document.getElementById("month").innerHTML=year_month;
+    }
+ 
+    function count() {
+        if (month != 2) {
+            if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
+                allday = 30;
+            }
+            else {
+                allday = 31;
+            }
+        }
+        else {
+            if (((year % 4) == 0 && (year % 100) != 0) || (year % 400) == 0) {
+                allday = 29;
+            }
+            else {
+                allday = 28;
+            }
+        }
+    }
+ 
+    function showDate(){
+        clock();
+        showMonth();
+        count();
+        var firstdate=new Date(year,month-1,1);
+        var xiqi=firstdate.getDay();
+        var daterow=document.getElementById("day");
+        daterow.innerHTML=" ";
+        if(xiqi!=0){
+            for(var i=0;i<xiqi;i++){
+                var dayElement=document.createElement("div");
+                dayElement.className="everyday";
+                daterow.appendChild(dayElement);
+            }
+        }
+        for(var j=1;j<=allday;j++){
+            var dayElement =document.createElement("div");
+            dayElement.className="everyday";
+            dayElement.innerHTML=j+"";
+            if(j==day){
+                dayElement.style.color="red";
+            }
+            daterow.appendChild(dayElement)
+        }
+    }
+    function lastMonth(){
+        if(month>1){
+            month-=1;
+        }
+        else{
+            month=12;
+            year-=1;
+        }
+        showDate();
+    }
+    function nextMonth(){
+        if(month<12){
+            month+=1;
+        }else{
+            month=1;
+            year+=1;
+        }
+        showDate();
+    }
+
+</script>
+</body>
+</html>
